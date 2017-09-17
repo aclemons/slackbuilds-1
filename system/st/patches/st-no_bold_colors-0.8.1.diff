@@ -1,0 +1,12 @@
+diff -Naur st-0.8.1.orig/x.c st-0.8.1/x.c
+--- st-0.8.1.orig/x.c	2018-03-21 09:29:59.000000000 +1300
++++ st-0.8.1/x.c	2018-03-31 18:05:26.856337334 +1300
+@@ -1295,7 +1295,7 @@
+ 
+ 	/* Change basic system colors [0-7] to bright system colors [8-15] */
+ 	if ((base.mode & ATTR_BOLD_FAINT) == ATTR_BOLD && BETWEEN(base.fg, 0, 7))
+-		fg = &dc.col[base.fg + 8];
++		fg = &dc.col[base.fg];
+ 
+ 	if (IS_SET(MODE_REVERSE)) {
+ 		if (fg == &dc.col[defaultfg]) {
