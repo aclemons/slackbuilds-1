@@ -1,0 +1,20 @@
+diff --git a/src/gui_interface.py b/src/gui_interface.py
+index b23cda6..3b922cc 100644
+--- a/src/gui_interface.py
++++ b/src/gui_interface.py
+@@ -1954,8 +1954,13 @@ class Interface:
+         self.sth_at_sth_dot_sth = r'\S+@\S+\.\S*[^\s)?]'
+ 
+         # Invalid XML chars
+-        self.invalid_XML_chars = u'[\x00-\x08]|[\x0b-\x0c]|[\x0e-\x1f]|'\
+-            u'[\ud800-\udfff]|[\ufffe-\uffff]'
++        if sys.maxunicode < 0x10FFFF:
++            # "narrow" python - only strip unpaired surrogates
++            self.invalid_XML_chars = u'[\x00-\x08]|[\x0b-\x0c]|[\x0e-\x1f]|'\
++                u'[\ufffe-\uffff]|[\ud800-\udbff](?![\udc00-\udfff])|(?<![\ud800-\udbff])[\udc00-\udfff]'
++        else:
++            self.invalid_XML_chars = u'[\x00-\x08]|[\x0b-\x0c]|[\x0e-\x1f]|'\
++                u'[\ud800-\udfff]|[\ufffe-\uffff]'
+ 
+     def popup_emoticons_under_button(self, button, parent_win):
+         """
