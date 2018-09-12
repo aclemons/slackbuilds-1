@@ -29,6 +29,7 @@ VERSION=${VERSION:-0.6.2}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_SBo}
 TARNAM=nbxmpp
+TARNAM2=$PRGNAM-nbxmpp
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -61,9 +62,17 @@ set -e
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
-rm -rf $TARNAM-$VERSION
-tar xvf $CWD/$TARNAM-$VERSION.tar.gz
-cd $TARNAM-$VERSION
+rm -rf $TARNAM-$VERSION $TARNAM2-$VERSION
+if [ -e $CWD/$TARNAM-$VERSION.tar.gz ]; then
+  tar xvf $CWD/$TARNAM-$VERSION.tar.gz
+  cd $TARNAM-$VERSION
+elif [ -e $CWD/$TARNAM2-$VERSION.tar.gz ] ; then
+  tar xvf $CWD/$TARNAM2-$VERSION.tar.gz
+  cd $TARNAM2-$VERSION
+else
+  echo "File not found"
+  exit 1
+fi
 chown -R root:root .
 find -L . \
  \( -perm 777 -o -perm 775 -o -perm 750 -o -perm 711 -o -perm 555 \
@@ -82,10 +91,11 @@ find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | gr
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -r doc/* $PKG/usr/doc/$PRGNAM-$VERSION
+cp -r doc/* $PKG/usr/doc/$PRGNAM-$VERSION || true
 cp COPYING $PKG/usr/doc/$PRGNAM-$VERSION
-cp PKG-INFO $PKG/usr/doc/$PRGNAM-$VERSION
+cp PKG-INFO $PKG/usr/doc/$PRGNAM-$VERSION || true
 cp ChangeLog $PKG/usr/doc/$PRGNAM-$VERSION
+cp README.md $PKG/usr/doc/$PRGNAM-$VERSION || true
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
