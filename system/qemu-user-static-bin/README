@@ -1,0 +1,11 @@
+QEMU is a generic and open source machine emulator and virtualizer,
+statically linked.
+
+After installation, you will need to run the following command to register the
+binfmts you need (example here for arm):
+
+  update-binfmts --import qemu-arm
+
+If you uninstall this package, you can remove the binfmts have registered with:
+
+  update-binfmts --package qemu-arm --remove qemu-arm /usr/bin
