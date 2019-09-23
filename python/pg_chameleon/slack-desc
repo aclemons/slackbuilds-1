@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+            |-----handy-ruler------------------------------------------------------|
+pg_chameleon: pg_chameleon (MySQL to PostgreSQL replica system)
+pg_chameleon:
+pg_chameleon: pg_chameleon is a MySQL to PostgreSQL replica system written in
+pg_chameleon: Python 3. The system use the library mysql-replication to pull the
+pg_chameleon: row images from MySQL which are stored into PostgreSQL as JSONB. A
+pg_chameleon: pl/pgsql function decodes the jsonb values and replays the changes
+pg_chameleon: against the PostgreSQL database.
+pg_chameleon:
+pg_chameleon: Homepage: https://pypi.org/project/pg_chameleon/
+pg_chameleon:
+pg_chameleon:
