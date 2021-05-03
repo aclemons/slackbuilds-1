@@ -90,6 +90,7 @@ PKGCONFD=/usr/lib${LIBDIRSUFFIX}/ghc-${GHC_VERSION}/package.conf.d
 mkdir -p $PKG/$PKGCONFD
 runghc Setup register --gen-pkg-config
 PKGID=$( grep -E "^id: " $PRGNAM-$VERSION.conf | sed "s/[[:space:]][[:space:]]*/ /" | cut -d" " -f2 )
+[ -z "$PKGID" ] && echo "PKGID not found in $SRCNAM-$VERSION.conf" && exit 1
 mv $PRGNAM-$VERSION.conf $PKG/$PKGCONFD/$PKGID.conf
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
