@@ -24,7 +24,7 @@
 
 PRGNAM=alacritty
 VERSION=${VERSION:-0.4.3}
-BUILD=${BUILD:-1}
+BUILD=${BUILD:-2}
 TAG=${TAG:-_SBo}
 
 if [ -z "$ARCH" ]; then
@@ -176,8 +176,8 @@ cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 mkdir -p $PKG/usr/share/applications
 if [ -e $PRGNAM.desktop ] ; then
   install -m 644 $PRGNAM.desktop $PKG/usr/share/applications
-elif [ -e extra/linux/$PRGNAM.desktop ] ; then
-  install -m 644 extra/linux/$PRGNAM.desktop $PKG/usr/share/applications
+elif [ -e extra/linux/Alacritty.desktop ] ; then
+  install -m 644 extra/linux/Alacritty.desktop $PKG/usr/share/applications
 fi
 
 if [ -e extra/logo/alacritty-term.svg ] ; then
